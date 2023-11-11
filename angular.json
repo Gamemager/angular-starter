@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "cli": {
-    "packageManager": "npm"
-  },
   "newProjectRoot": "projects",
   "projects": {
-    "myApp": {
+    "angular_project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/angular_project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -63,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "myApp:build:production"
+              "browserTarget": "angular_project:build:production"
             },
             "development": {
-              "browserTarget": "myApp:build:development"
+              "browserTarget": "angular_project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myApp:build"
+            "browserTarget": "angular_project:build"
           }
         },
         "test": {
@@ -99,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5edb0b04-4ff4-4831-b8f6-83f0704fb93e"
   }
 }

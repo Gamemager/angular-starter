@@ -1,32 +1,88 @@
-<form class="form-register">
-    <h5>REGISTRARSE</h5> <br>
-    <div>
-        <label for="name"> Nombres y Apellidos: </label>
-        <input class="controls-register" type="text" id="name" name="Full_name"required placeholder="Ejemplo: Juan Jose Perez Gomez"/> 
-        
+<form [formGroup]="registerForm" class="form-register" (ngSubmit)="onSubmit()">
+  <h5>REGISTRARSE</h5>
+  <br />
+  <div>
+    <label for="name"> Nombres y Apellidos: </label>
+    <input
+      class="controls-register"
+      type="text"
+      id="name"
+      formControlName="Full_name"
+      required
+      placeholder="Ejemplo: Juan Jose Perez Gomez"
+    />
+  </div>
+  <div>
+    <label for="id"> Identificación: </label>
+    <input
+      class="controls-register"
+      type="text"
+      id="id"
+      formControlName="dni"
+      required
+      placeholder="Ejemplo: 1111111111"
+    />
+  </div>
+  <div>
+    <label for="date"> Fecha de Nacimiento: </label>
+    <input type="date" id="date" formControlName="DOB" />
+  </div>
+  <div>
+    <label for="user"> Usuario: </label>
+    <input
+      class="controls-register"
+      type="text"
+      id="user"
+      formControlName="Usuario"
+      required
+      placeholder="Ejemplo: Juan.12"
+    />
+    <div
+      *ngIf="
+        registerForm.get('username')?.invalid &&
+        (registerForm.get('username')?.dirty ||
+          registerForm.get('username')?.touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="registerForm.get('username')?.hasError('required')">
+        Usuario es requerido.
+      </div>
     </div>
-    <div>
-        <label for="id"> Identificación: </label>
-        <input class="controls-register" type="password" id="id" name="_Id" required placeholder="Ejemplo: 1111111111"/>
-            
-    </div>
-    <div>
-        <label for="date"> Fecha de Nacimiento: </label>
-        <input type="date" id="date" name="DOB"/>
-    </div>
-    
-    <div>
-        <label for="user"> Usuario: </label>
-        <input class="controls-register" type="text" id="user" name="Usuario" required placeholder="Ejemplo: Juan.12"/>
-    
-    </div>
-
-    <div>
-    
-        <label for="password"> Contraseña: </label>
-        <input class="controls-register" type="password" id="password"  name="Password" required placeholder="Ejemplo: 12345"/>
-    
-    </div>
-    <input name="terminos_y_condiciones" type="checkbox"> Estoy de acuerdo con <a href="#"> Terminos y Condiciones</a> 
-    <button class="button-register" type="submit"> Registrarse </button>
+  </div>
+  <div>
+    <label for="password"> Contraseña: </label>
+    <input
+      class="controls-register"
+      type="password"
+      id="password"
+      formControlName="Password"
+      required
+      placeholder="Ejemplo: 12345"
+    />
+  </div>
+  <div>
+    <label for="type_user"> Tipo de usuario: </label>
+    <input
+      class="controls-register"
+      type="type_user"
+      id="type_user"
+      formControlName="Tipo_usuario"
+      required
+      placeholder="Ejemplo: administrador"
+    />
+  </div>
+  <input
+    name="terminos_y_condiciones"
+    type="checkbox"
+    formControlName="terminos_y_condiciones"
+  />
+  Estoy de acuerdo con <a href="#"> Terminos y Condiciones</a>
+  <button
+    class="button-register"
+    type="submit"
+    [disabled]="registerForm.invalid"
+  >
+    Registrarse
+  </button>
 </form>

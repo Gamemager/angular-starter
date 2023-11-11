@@ -1,27 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/cors/service/api.service';
 
 @Component({
   selector: 'app-acceder',
   templateUrl: './acceder.component.html',
-  styleUrls: ['./acceder.component.css']
+  styleUrls: ['./acceder.component.css'],
 })
-export class AccederComponent implements OnInit{
+export class AccederComponent implements OnInit {
+  LoginForm = this.create_form();
 
-  LoginForm = new FormGroup({
-    user : new FormControl('',Validators.required),
-    password : new FormControl('', Validators.required)}
-  )
+  constructor(
+    private formBuilder: FormBuilder,
+    private ApiService: ApiService,
+    private router: Router
+  ) {}
 
-  constructor(){
-    
+  create_form() {
+    return this.formBuilder.group({
+      Usuario: ['', Validators.required],
+      Password: ['', Validators.required],
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-  
-  onLogin(form: any){
-    console.log(form)
+  onLogin() {
+    this.ApiService.login(this.LoginForm.value).subscribe(
+      (data: any) => {
+        console.log(data);
+        sessionStorage.setItem('token', data.token);
+        this.router.navigate(['/private/home']);
+      },
+      (error) => {
+        alert(error.error.message);
+        console.error(error);
+      }
+    );
   }
 }

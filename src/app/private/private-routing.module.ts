@@ -8,21 +8,23 @@ import { HomeComponent } from './Componentes/home/home.component';
 import { MasComponent } from './Componentes/mas/mas.component';
 import { CategoriasComponent } from './Componentes/categorias/categorias.component';
 
-
-const routes: Routes = [ 
-{path: '', component:PrivateComponent,children:
-[{path: 'cuenta', component: CuentaComponent},
-{path: 'cambioContraseña', component: CambioPasswordComponent},
-{path: 'MisCompras', component: ComprasComponent},
-{path: "home", component:HomeComponent}, 
-{path:"Mas", component:MasComponent},
-{path:"Categorias", component:CategoriasComponent},
-]}
-  
+const routes: Routes = [
+  {
+    path: '',
+    component: PrivateComponent,
+    children: [
+      { path: 'cuenta', component: CuentaComponent },
+      { path: 'cambioContraseña', component: CambioPasswordComponent },
+      { path: 'MisCompras', component: ComprasComponent },
+      { path: 'home', component: HomeComponent },
+      { path: 'Mas', component: MasComponent },
+      { path: 'Categorias', component: CategoriasComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PrivateRoutingModule { }
+export class PrivateRoutingModule {}
