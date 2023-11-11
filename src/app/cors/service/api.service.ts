@@ -12,9 +12,14 @@ export class ApiService {
   }
 
   obtener() {
-    this.http.get(`${this.urlApi}/api/inventario`).subscribe((data) => {
-      console.log(data);
-    });
+    this.http.get(`${this.urlApi}/api/inventario`).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   create_user(data_user: any) {
